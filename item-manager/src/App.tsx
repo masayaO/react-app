@@ -1,24 +1,25 @@
 import React, { FC } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import UserItems from './containers/pages/UserItems';
+import RegisterItem from './containers/pages/RegisterItem';
+import Header from './containers/organisms/Header';
 
-const App: FC = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
-);
+const App: FC = () => {
+  const userId = '1';
+
+  return (
+    <>
+      <div className="container">
+        <Header userId={userId} />
+        <Routes>
+          <Route path="/" element={<UserItems userId={userId} />} />
+          <Route path="/:userId/register" element={<RegisterItem />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+    </>
+  );
+};
 
 export default App;

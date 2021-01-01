@@ -1,8 +1,10 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import RegisterItem from '../../components/pages/RegisterItem';
+import { addItem } from '../../domains';
 
 const EnhancedRegisterItem: FC = () => {
+  const navigate = useNavigate();
   const { userId } = useParams();
   const [form, setForm] = useState({
     itemName: '',
@@ -16,10 +18,8 @@ const EnhancedRegisterItem: FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(
-      `userId: ${userId}, form: ${form.itemName}, ${form.imageUrl}, ${form.description}`,
-    );
+    addItem({ ...form, userId });
+    navigate('/');
   };
 
   return (

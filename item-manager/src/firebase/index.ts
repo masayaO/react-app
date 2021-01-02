@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,5 +16,6 @@ export const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // Firestoreのインスタンス作成
 export const db = firebaseApp.firestore();
+export const auth = firebaseApp.auth();
 
 export default firebase;

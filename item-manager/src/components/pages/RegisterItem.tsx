@@ -1,6 +1,8 @@
 import React, { ChangeEvent, FC, FormEvent } from 'react';
 import { Card, Form, Grid } from 'semantic-ui-react';
+import { useParams } from 'react-router';
 import PageTitle from '../molecules/PageTitle';
+import Header from '../../containers/organisms/Header';
 
 type FormState = {
   itemName: string;
@@ -15,10 +17,12 @@ type Props = {
 };
 
 const RegisterItem: FC<Props> = (props) => {
+  const { userId } = useParams();
   const { form, handleChange, handleSubmit } = props;
 
   return (
     <>
+      <Header userId={userId} />
       <PageTitle title="Register Item" />
       <Grid columns={2}>
         <Grid.Column>

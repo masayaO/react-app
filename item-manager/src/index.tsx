@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from 'react-query-devtools';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css';
+import FirebaseApp from './FirebaseApp';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,7 +26,9 @@ const queryClient = new QueryClient({
 ReactDOM.render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <FirebaseApp>
+        <App />
+      </FirebaseApp>
       {process.env.NODE_ENV === 'development' && (
         <ReactQueryDevtools initialIsOpen={false} />
       )}

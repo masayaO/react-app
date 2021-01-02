@@ -22,6 +22,13 @@ const Header: FC<Props> = (props) => {
           active={activeItem === 'register'}
           onClick={() => handleItemClick('register')}
         />
+        <Menu.Menu position="right">
+          <Menu.Item
+            name="logout"
+            active={activeItem === 'logout'}
+            onClick={() => handleItemClick('logout')}
+          />
+        </Menu.Menu>
       </Menu>
     </>
   );

@@ -5,13 +5,13 @@ import EnhancedItemList from '../../containers/organisms/ItemList';
 import PageTitle from '../molecules/PageTitle';
 import Header from '../../containers/organisms/Header';
 
-const UserItems: FC<{ userId: string }> = ({ userId }) => (
+const UserItems: FC = () => (
   <>
-    <Header userId={userId} />
+    <Header />
     <PageTitle title="User Items" />
     <ErrorBoundary>
       <Suspense fallback={<Spinner />}>
-        <EnhancedItemList userId={userId} />
+        <EnhancedItemList />
       </Suspense>
     </ErrorBoundary>
   </>

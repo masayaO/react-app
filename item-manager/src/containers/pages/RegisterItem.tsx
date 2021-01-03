@@ -1,11 +1,12 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import React, { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
 import RegisterItem from '../../components/pages/RegisterItem';
 import { addItem } from '../../domains';
+import UserContext from '../../contexts';
 
 const EnhancedRegisterItem: FC = () => {
   const navigate = useNavigate();
-  const { userId } = useParams();
+  const { userId } = useContext(UserContext);
   const [form, setForm] = useState({
     itemName: '',
     description: '',
@@ -18,6 +19,7 @@ const EnhancedRegisterItem: FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    if (!userId) throw Error('');
     addItem({ ...form, userId });
     navigate('/');
   };

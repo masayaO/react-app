@@ -11,13 +11,15 @@ const EnhancedLogin: FC = () => {
   });
 
   const login = async (email: string, password: string) => {
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      navigate('/');
-    } catch (error) {
-      // eslint-disable-next-line no-alert
-      alert(error);
-    }
+    await auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        navigate('/');
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-alert
+        alert(error);
+      });
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

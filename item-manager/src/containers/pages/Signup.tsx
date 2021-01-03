@@ -11,13 +11,15 @@ const EnhancedSignup: FC = () => {
   });
 
   const signup = async (email: string, password: string) => {
-    try {
-      await auth.createUserWithEmailAndPassword(email, password);
-      navigate('/');
-    } catch (error) {
-      // eslint-disable-next-line no-alert
-      alert(error);
-    }
+    await auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        navigate('/');
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-alert
+        alert(error);
+      });
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -1,14 +1,13 @@
 import React, { FC, useContext } from 'react';
-import { Route, RouteProps } from 'react-router';
+import { Navigate, Route, RouteProps } from 'react-router';
 import UserContext from './contexts';
-import Login from './containers/pages/Login';
 
 const PrivateRoute: FC<RouteProps> = ({ element, ...options }) => {
-  const { user } = useContext(UserContext);
-  const Element = user ? element : <Login />;
+  const { userId } = useContext(UserContext);
+  const Element = userId ? element : <Navigate to="login" />;
 
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Route element={Element} {...options} />;
+  return <Route {...options} element={Element} />;
 };
 
 export default PrivateRoute;

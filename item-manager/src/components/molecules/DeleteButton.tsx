@@ -24,7 +24,6 @@ const DeleteButton: FC<{ handleDelete: () => void }> = ({ handleDelete }) => {
           color="red"
           onClick={() => {
             handleDelete();
-            setOpen(false);
           }}
         >
           <Icon name="trash" /> Delete

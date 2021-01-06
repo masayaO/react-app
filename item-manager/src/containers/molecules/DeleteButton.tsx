@@ -1,16 +1,14 @@
 import React, { FC } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router';
 import DeleteButton from '../../components/molecules/DeleteButton';
 import { deleteItem } from '../../domains';
+import paths from '../../paths';
 
 const EnhancedDeleteButton: FC<{ itemId: string }> = ({ itemId }) => {
-  const client = useQueryClient();
+  const navigate = useNavigate();
   const handleClick = async () => {
     await deleteItem(itemId);
-    client.removeQueries(['items']);
-
-    return <Navigate to="/" replace />;
+    navigate(paths.home);
   };
 
   return <DeleteButton handleDelete={handleClick} />;

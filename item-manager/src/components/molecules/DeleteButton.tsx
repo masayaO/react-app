@@ -23,6 +23,7 @@ const DeleteButton: FC<{ handleDelete: () => void }> = ({ handleDelete }) => {
         <Button
           color="red"
           onClick={() => {
+            setOpen(false);
             handleDelete();
           }}
         >

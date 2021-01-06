@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import RegisterItem from '../../components/pages/RegisterItem';
 import { addItem } from '../../domains';
 import UserContext from '../../contexts';
+import paths from '../../paths';
 
 const EnhancedRegisterItem: FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const EnhancedRegisterItem: FC = () => {
     event.preventDefault();
     if (!userId) throw Error('');
     addItem({ ...form, userId });
-    navigate('/');
+    navigate(paths.home);
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Header from '../../components/organisms/Header';
 import { auth } from '../../firebase';
+import paths from '../../paths';
 
 const EnhancedHeader: FC = () => {
   const [activeItem, setActiveItem] = useState('home');
@@ -10,11 +11,11 @@ const EnhancedHeader: FC = () => {
   const handleItemClick = async (nextActiveItem: string) => {
     setActiveItem(nextActiveItem);
     if (nextActiveItem === 'register') {
-      navigate(`/items`);
+      navigate(paths.items);
     } else if (nextActiveItem === 'logout') {
       await auth.signOut();
     } else {
-      navigate('/');
+      navigate(paths.home);
     }
   };
 

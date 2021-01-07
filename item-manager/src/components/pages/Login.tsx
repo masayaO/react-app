@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, FormEvent } from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, Message } from 'semantic-ui-react';
 import PageTitle from '../molecules/PageTitle';
 
 type LoginFormState = {
@@ -9,16 +9,18 @@ type LoginFormState = {
 
 type Props = {
   form: LoginFormState;
+  error: string;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 };
 
 const Login: FC<Props> = (props) => {
-  const { form, handleChange, handleSubmit } = props;
+  const { form, error, handleChange, handleSubmit } = props;
 
   return (
     <>
       <PageTitle title="Login" />
+      {error && <Message error>{error}</Message>}
       <Form onSubmit={handleSubmit}>
         <Form.Input
           label="Email"

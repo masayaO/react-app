@@ -2,7 +2,8 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 import registerImage from '../domains/services/add-image';
 import { addItem } from '../domains';
-import paths from '../paths';
+import Paths from '../utils/paths';
+import getPath from '../utils/get-path';
 
 type RegisterItemForm = {
   itemName: string;
@@ -31,8 +32,6 @@ const useRegisterItem = (
 
     if (imageOpt) {
       const imageData = await registerImage(userId, imageOpt);
-      // eslint-disable-next-line no-console
-      console.log(imageData);
       setForm({
         ...form,
         imageName: imageData.imageName,
@@ -46,7 +45,9 @@ const useRegisterItem = (
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     addItem({ ...form, userId });
-    navigate(paths.home);
+    navigate(
+      getPath<typeof Paths.home>({ path: Paths.home }),
+    );
   };
 
   return [form, handleFormChange, handleSubmit];

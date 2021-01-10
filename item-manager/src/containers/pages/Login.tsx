@@ -2,8 +2,9 @@ import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { auth } from '../../firebase';
 import Login from '../../components/pages/Login';
-import paths from '../../paths';
+import Paths from '../../utils/paths';
 import errorMessages, { AuthError } from '../../firebase/error-messages';
+import getPath from '../../utils/get-path';
 
 const EnhancedLogin: FC = () => {
   const navigate = useNavigate();
@@ -17,7 +18,9 @@ const EnhancedLogin: FC = () => {
     await auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        navigate(paths.home);
+        navigate(
+          getPath<typeof Paths.home>({ path: Paths.home }),
+        );
       })
       .catch((error) => {
         // eslint-disable-next-line no-console

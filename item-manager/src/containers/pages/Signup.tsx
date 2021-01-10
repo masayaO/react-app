@@ -2,7 +2,8 @@ import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { auth } from '../../firebase';
 import Signup from '../../components/pages/Signup';
-import paths from '../../paths';
+import Paths from '../../utils/paths';
+import getPath from '../../utils/get-path';
 
 const EnhancedSignup: FC = () => {
   const navigate = useNavigate();
@@ -15,7 +16,9 @@ const EnhancedSignup: FC = () => {
     await auth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        navigate(paths.home);
+        navigate(
+          getPath<typeof Paths.home>({ path: Paths.home }),
+        );
       })
       .catch((error) => {
         // eslint-disable-next-line no-alert

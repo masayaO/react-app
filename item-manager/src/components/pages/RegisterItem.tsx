@@ -11,12 +11,12 @@ type FormState = {
 
 type Props = {
   form: FormState;
-  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleFormChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 };
 
 const RegisterItem: FC<Props> = (props) => {
-  const { form, handleChange, handleSubmit } = props;
+  const { form, handleFormChange, handleSubmit } = props;
 
   return (
     <>
@@ -30,22 +30,16 @@ const RegisterItem: FC<Props> = (props) => {
               type="text"
               name="itemName"
               value={form.itemName}
-              onChange={handleChange}
-            />
-            <Form.Input
-              label="Item Image"
-              type="text"
-              name="imageUrl"
-              value={form.imageUrl}
-              onChange={handleChange}
+              onChange={handleFormChange}
             />
             <Form.Input
               label="Description"
               type="text"
               name="description"
               value={form.description}
-              onChange={handleChange}
+              onChange={handleFormChange}
             />
+            <Form.Input type="file" onChange={handleFormChange} />
             <Form.Button type="submit" color="black">
               Register
             </Form.Button>

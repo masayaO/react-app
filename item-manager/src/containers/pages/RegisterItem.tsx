@@ -1,34 +1,20 @@
-import React, { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
-import { useNavigate } from 'react-router';
+import React, { FC, useContext } from 'react';
 import RegisterItem from '../../components/pages/RegisterItem';
-import { addItem } from '../../domains';
 import UserContext from '../../contexts';
-import paths from '../../paths';
+import useRegisterItem from '../../hooks/use-register-item';
 
 const EnhancedRegisterItem: FC = () => {
-  const navigate = useNavigate();
   const { userId } = useContext(UserContext);
-  const [form, setForm] = useState({
-    itemName: '',
-    description: '',
-    imageUrl: '',
-  });
+  if (!userId) {
+    throw Error('UserId Not Found');
+  }
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    if (!userId) throw Error('');
-    addItem({ ...form, userId });
-    navigate(paths.home);
-  };
+  const [form, handleFormChange, handleSubmit] = useRegisterItem(userId);
 
   return (
     <RegisterItem
       form={form}
-      handleChange={handleChange}
+      handleFormChange={handleFormChange}
       handleSubmit={handleSubmit}
     />
   );

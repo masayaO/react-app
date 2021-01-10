@@ -1,8 +1,16 @@
 import { storage } from '../../firebase';
 
-const registerImage = async (userId: string, image: File): Promise<string> => {
-  const uploadTask = storage.ref(`/${userId}/${image.name}`);
-  uploadTask
+type RegisteredImageData = {
+  imageName: string;
+  imageUrl: string;
+};
+const registerImage = async (
+  userId: string,
+  image: File,
+): Promise<RegisteredImageData> => {
+  const imageName = `${Date.now()}_${image.name}`;
+  const uploadTask = storage.ref(`/${userId}/${imageName}`);
+  await uploadTask
     .put(image)
     .then((u) => {
       // eslint-disable-next-line no-console
@@ -13,7 +21,11 @@ const registerImage = async (userId: string, image: File): Promise<string> => {
       console.log(error);
     });
 
-  return uploadTask.getDownloadURL().then((url) => String(url));
+  return storage
+    .ref()
+    .child(`/${userId}/${imageName}`)
+    .getDownloadURL()
+    .then((url) => ({ imageName, imageUrl: String(url) }));
 };
 
 export default registerImage;

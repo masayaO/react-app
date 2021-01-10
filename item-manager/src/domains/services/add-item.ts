@@ -4,6 +4,7 @@ type RegisterItem = {
   itemName: string;
   userId: string;
   description: string;
+  imageName: string;
   imageUrl: string;
 };
 

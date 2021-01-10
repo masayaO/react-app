@@ -7,6 +7,7 @@ import paths from '../paths';
 type RegisterItemForm = {
   itemName: string;
   description: string;
+  imageName: string;
   imageUrl: string;
 };
 
@@ -21,6 +22,7 @@ const useRegisterItem = (
   const [form, setForm] = useState<RegisterItemForm>({
     itemName: '',
     description: '',
+    imageName: '',
     imageUrl: '',
   });
 
@@ -28,8 +30,14 @@ const useRegisterItem = (
     const imageOpt = event.target.files?.[0];
 
     if (imageOpt) {
-      const url = await registerImage(userId, imageOpt);
-      setForm({ ...form, imageUrl: url });
+      const imageData = await registerImage(userId, imageOpt);
+      // eslint-disable-next-line no-console
+      console.log(imageData);
+      setForm({
+        ...form,
+        imageName: imageData.imageName,
+        imageUrl: imageData.imageUrl,
+      });
     } else {
       setForm({ ...form, [event.target.name]: event.target.value });
     }
